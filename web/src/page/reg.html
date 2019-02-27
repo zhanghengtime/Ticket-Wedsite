@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>用户注册</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/vue/dist/vue.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/vue-resource/dist/vue-resource.min.js"></script>
+	<script type="text/javascript" src="../js/reg.js"></script>
+	<link href="../../bower_components/animate/dist/css/animate.css" rel="stylesheet" />
+	<link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../style/reg.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div id="main">
+		<div id="header">
+			<div id="header-div">用户注册</div>
+			<div id="head-line"></div>
+		</div>
+		<form id="js-form" class="form-horizontal animated slideInLeft">
+			<div class="form-group" id="js_name">
+				<label for="inputName" class="col-sm-2 control-label">用户名</label>
+				<div class="col-sm-4" id="js_name_div">
+					<input type="text" class="form-control" id="inputName" placeholder="用户名" v-model="name" @blur="nameFun()" maxlength="10" describedby="inputSuccess2Status" />
+				</div>
+				<div id="js_name_tip" class="font_error"></div>
+			</div>
+			<div class="form-group" id="js_password">
+				<label for="inputPassword" class="col-sm-2 control-label">密码</label>
+				<div class="col-sm-4">
+					<input type="password" class="form-control" id="inputPassword" placeholder="密码" v-model="password" data-toggle="popover" data-trigger="focus" data-content="长度为6-30个字符.<br>建议由字母数字符号组成.<br>不易于手机号相同" @blur="passwordFun()" maxlength="30">
+				</div>
+				<div id="js_password_tip" class="font_error"></div>
+			</div>
+			<div class="form-group" id="js_password1">
+				<label for="inputPassword2" class="col-sm-2 control-label">再次输入密码</label>
+				<div class="col-sm-4">
+					<input type="password" class="form-control" id="inputPassword" placeholder="再次输入密码" v-model="password1" @blur="passwordCheck" maxlength="30">
+				</div>
+				<div id="js_password1_tip" class="font_error"></div>
+			</div>
+			<div class="form-group" id="js_email">
+				<label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
+				<div class="col-sm-4">
+					<input type="email" class="form-control" id="inputEmail" placeholder="邮箱" v-model="email" maxlength="20" @blur="emailFun()">
+				</div>
+				<div id="js_email_tip" class="font_error"></div>
+			</div>
+			<div class="form-group" id="js_tel">
+				<label for="inputTel" class="col-sm-2 control-label">电话</label>
+				<div class="col-sm-4">
+					<input type="tel" class="form-control" id="inputTel" placeholder="电话" v-model="tel" maxlength="11" @blur="telFun()">
+				</div>
+				<div id="js_tel_tip" class="font_error"></div>
+			</div>
+			<div class="form-group" id="js_id">
+				<label for="inputID" class="col-sm-2 control-label">身份证号</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="inputID" placeholder="身份证号" v-model="id" maxlength="18" @blur="idFun()">
+				</div>
+				<div id="js_id_tip" class="font_error"></div>
+			</div>
+			<div class="form-group" id="js_date">
+				<label for="inputDate" class="col-sm-2 control-label">出生日期</label>
+				<div class="col-sm-4">
+					<input type="date" class="form-control" id="inputDate" placeholder="出生日期" v-model="date">
+				</div>
+				<div id="js_date_tip" class="font_error"></div>
+			</div>
+			<div class="form-group" id="js_inputData">
+				<label for="inputDate" class="col-sm-2 control-label">验证码</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="inputDate" placeholder="验证码" maxlength="4" @blur="inputDateTest()" v-model="inputData">
+				</div>
+				<img id="im_png" src='./yanzhengma.php?r=echo rand(); ?>' class="col-sm-2" style="height: 34px" />
+				<div id="js_inputData_tip" class="font_error"></div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="button" class="btn btn-primary col-sm-1 " @click="submitData()">注册</button>
+					<a style="margin:10px 0 0 50px" class="col-sm-2" href="./login.html">已有账号?登录</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

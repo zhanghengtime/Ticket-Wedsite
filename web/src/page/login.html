@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>用户注册</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--所用框架 jQuery vue vue-resource bootstrap -->
+	<script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/vue/dist/vue.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/vue-resource/dist/vue-resource.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+	<!--自己的js，css -->
+	<link href="../style/login.css" rel="stylesheet" />
+	<script src="../js/login.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div id="div_background"></div>
+
+	<form class="from_style" id="js_form" >
+		<label class="sr-only" for="username">用户名</label>
+		<div class="input-group input_div" id="js_name">
+			<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+			<input type="text" class="form-control" id="username" placeholder="用户名" v-model="username">
+		</div>
+
+		<label class="sr-only" for="password">密码</label>
+		<div class="input-group input_div">
+			<div class="input-group-addon"><img style="width: 15px; height: 15px;" src="../image/password.png" class=""></div>
+			<input type="password" class="form-control" id="password" placeholder="密码" v-model="password">
+		</div>
+
+		<div class="input-group">
+			<input type="button" value="登录" class="btn btn-primary input_div" @click="submitFun()" />
+		</div>
+		<div>还没有账号，去 <a href="./reg.html">注册</a> </div>
+	</form>
+</body>
+
+</html>

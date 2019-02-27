@@ -1,0 +1,234 @@
+#js_div {
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+}
+
+#js_form {
+	margin: 15px auto;
+}
+
+#footer {
+	margin: 15px auto;
+	width: 100%;
+	height: 56px;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+#logo {
+	margin-left: 10%;
+}
+
+#div_a {
+	margin-right: 10%;
+}
+
+#div_titel {
+	margin: auto auto auto 10px;
+	font-size: 20px;
+}
+
+.tipss {
+	width: 740px;
+	height: 70px;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	border-bottom: 1px solid #E8E8E8
+}
+
+#error {
+	width: 740px;
+	height: 70px;
+	margin: 20px auto;
+	background-color: #FFFEF1;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+}
+
+#img_error {
+	width: 42px;
+	height: 42px;
+	margin: 0 20px 0 0;
+
+}
+
+#div_error {}
+
+.order {
+	width: 740px;
+	height: 30px;
+	margin: 20px auto;
+	background-color: #F0F0F0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.order_font {
+	width: 124px;
+	line-height: 30px;
+	margin: 0;
+	text-align: center;
+}
+
+.order_button {
+	margin: auto 0;
+	width: 70px;
+	height: 30px;
+}
+
+#buy_ticket {
+	margin: 10px auto;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+	width: 740px;
+	align-items: center;
+}
+
+#car_data {
+	width: 100%;
+	height: 140px;
+	border: 1px solid #EFF6FC;
+}
+
+.left_div {
+	width: 140px;
+	float: left;
+	height: 100%;
+	color: #666666;
+	padding: 20px;
+}
+
+.left_div font {
+	font-size: 18px;
+	line-height: 30px;
+}
+
+#car_data .right_div {
+	width: 600px;
+	height: 140px;
+	background-color: #EFF6FC;
+	margin-left: 140px;
+}
+
+#user_data {
+	margin: 30px 0;
+	width: 100%;
+	border: 1px solid #EFF6FC;
+}
+
+.div_users {
+	float: right;
+	width: 590px;
+	height: 150px;
+	margin: 0 0 20px 0;
+	background-color: #EFF6FC;
+	padding: 20px 0 0 10px;
+}
+
+#user_label {
+	width: 80px;
+	text-align: right;
+	padding: 0 10px 0 0 ;
+	margin: 0 0 20px 0;
+}
+
+#data_label {
+	width: 80px;
+	text-align: right;
+	padding: 0 10px 0 0 ;
+}
+
+
+
+.user_tips{
+	margin: 0 0 10px 0 ;
+}
+.user_input{
+	width: 300px;
+}
+
+.user_button{
+	background-image: url(../image/button.png);
+	background-repeat: no-repeat;
+	width: 141px;
+	height: 39px;
+}
+
+#get_ticket{
+	margin: 0 0 30px;
+	width: 100%;
+	border: 1px solid #EFF6FC;
+}
+
+.div_style{
+	background-color: #EFF6FC;
+	width: 590px;
+	float: left;
+	height: 125px
+}
+.div_check{
+	background-color: #EFF6FC;
+	width: 590px;
+	float: right;
+	padding: 0 70px;
+}
+
+.tips{
+	float: left;
+	width: 150px;
+	height: 30px;
+	margin: 0;
+	line-height: 30px;
+}
+
+.tips:hover{
+	border-bottom: 2px solid blue;
+}
+
+.tip_click{
+	float: left;
+	width: 150px;
+	height: 30px;
+	margin: 0;
+	border-bottom: 2px solid blue;
+}
+
+.pay_button{
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	line-height: 15px;
+}
+
+
+.modal_div{
+	display: flex;
+	flex-direction: column;
+}
+
+
+#main{
+	margin: auto;
+	width: 400px;
+	height: auto;
+}
+
+#main #top{
+	color: white;
+	padding-top: 6px;
+	width: 400px;
+	height: 90px;
+	background-color: #70B7FF;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}

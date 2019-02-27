@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>车票预订</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--所用框架 jQuery vue vue-resource bootstrap -->
+	<script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/vue/dist/vue.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/vue-resource/dist/vue-resource.min.js"></script>
+	<script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../../bower_components/animate/dist/css/animate.css" rel="stylesheet" />	
+	<link href="../style/root.css" rel="stylesheet" />
+	<script src="../js/root.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div id="js_app" v-cloak>
+		<div class="left">
+			<div id="fun_div">功能选择</div>
+			<ul id="fun_ul" role="tablist">
+				<li class="active">
+					<div href="#home">
+						<input type="button" class="fun_font btn btn-primary" @click="showData=[true,false,false];" value="设置优惠幅度"/>
+					</div>
+				</li>
+				<li>
+					<div href="#profile">
+						<input type="button" class="fun_font btn btn-primary" @click="showData=[false,true,false]" value="设置汽车线路"/>
+					</div>
+				</li>
+				<li>
+					<div href="#messages">
+						<input type="button" class="fun_font btn btn-primary" @click="showData=[false,false,true]" value="统计订单"/>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="right_div" v-if="showData[0]">
+			<table class="table table-bordered table-hover cars" style="margin: 0 auto;width:600px">
+				<tr class="cars_tr">
+					<td style="width:100px">优惠种类</td>
+					<td style="width:100px">优惠额度</td>
+				</tr>
+				<tr class="cars_tr" v-for="(favorable,index) in favorables">
+					<td style="width:100px">{{favorable.id}}</td>
+					<td style="width:100px">{{favorable.num}}</td>
+					<td style="width:70px;"><input type="button" class="btn btn-primary" value="修改数据" @click="changefavorables(favorable,index)" data-toggle="modal" data-target=".bs-example-modal-changefavorable"></td>
+				</tr>
+			</table>
+		</div>
+			<div id="right_div" v-if="showData[1]">
+				<table class="table table-bordered table-hover cars" style="margin: 0 auto">
+					<tr class="cars_tr">
+						<td style="width:100px">编号</td>
+						<td style="width:100px">始发站</td>
+						<td style="width:100px">终点站</td>
+						<td style="width:100px">出发时间</td>
+						<td style="width:100px">到达时间</td>
+						<td style="width:70px">价格</td>
+						<td style="width:70px">剩余票数</td>
+						<td style=""></td>
+						<td style="width:70px;"></td>
+					</tr>
+					<tr class="cars_tr" v-for="(car,index) in cars">
+						<td style="width:100px">{{car.id}}</td>
+						<td style="width:100px">{{car.startStation}}</td>
+						<td style="width:100px">{{car.endStation}}</td>
+						<td style="width:100px">{{car.startDate}}</td>
+						<td style="width:100px">{{car.endDate}}</td>
+						<td style="width:70px">￥{{car.price}}</td>
+						<td style="width:70px">{{car.tickets}}</td>
+						<td style="width:70px;"><input type="button" class="btn btn-primary" value="修改数据" @click="changeCarFun(car,index)" data-toggle="modal" data-target=".bs-example-modal-changeCar"></td>
+						<td style="width:70px;"><input type="button" class="btn btn-danger" value="删除数据" @click="deleteCarFun(index)" data-toggle="modal" data-target=".bs-example-modal-deleteCar"></td>
+					</tr>
+				</table>
+				<div style="margin: 10px auto">
+					<input type="button" value="添加数据" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-addCar" style="margin: 10px auto"/>
+				</div>
+			</div>
+	<div id="right_div" v-if="showData[2]">
+			<table class="table table-bordered table-hover cars" style="margin: 0 auto">
+				<tr class="cars_tr">
+					<td style="width:100px">序号(ID)</td>
+					<td style="width:100px">用户名</td>
+					<td style="width:100px">实际价格</td>
+					<td style="width:100px">姓名</td>
+					<td style="width:100px">身份证号</td>
+				</tr>
+				<tr class="cars_tr" v-for="(ticket) in tickets">
+					<td style="width:100px">{{ticket.id}}</td>
+					<td style="width:100px">{{ticket.username}}</td>
+					<td style="width:100px">￥{{ticket.price}}</td>
+					<td style="width:100px">{{ticket.name}}</td>
+					<td style="width:100px">{{ticket.idDate}}</td>
+				</tr>
+			</table>
+			<div style="margin: 10px auto">
+				<font>当前已售票数：{{alltickets}}</font>&nbsp;
+				<font>当前已得到总收入：￥{{allprice}}</font>
+			</div>
+		</div>	
+		
+		<!--模态框-->
+	<div class="modal fade bs-example-modal-changefavorable" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content" style="padding: 10px; height: 190px">
+					<table class="table table-bordered">
+						<tr class="cars_tr">
+							<td style="width:100px"></td>
+							<td style="width:100px">优惠种类</td>
+							<td style="width:100px">优惠额度</td>
+						</tr>
+						<tr class="cars_tr">
+							<td style="width:100px">原始数据</td>
+							<td style="width:100px">{{changefavorable.id}}</td>
+							<td style="width:100px">{{changefavorable.num}}</td>
+						</tr>
+						<tr class="cars_tr">
+							<td style="width:100px">修改为</td>
+							<td style="width:100px"><form><input type="text" style="width: 90px;margin:0 5px" v-model="changefavorable2.id" /></form></td>
+							<td style="width:100px"><form><input type="text" datatype="n" errormsg="请输入数字"  style="width: 90px;margin:0 5px" v-model="changefavorable2.num" /></td>
+						</tr>
+					</table>
+					<div style="float: right">
+						<form>
+						<input type="button" class="btn btn-primary" data-dismiss="modal" value="保存修改" @click="savechangefavorable()" />
+						<input type="button" class="btn btn-danger" data-dismiss="modal" value="取消修改" /></form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+	<div class="modal fade bs-example-modal-changeCar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" style="padding: 10px; height: 190px">
+				<table class="table table-bordered">
+					<tr class="cars_tr" style="margin: 10px;">
+						<td style="width:100px"></td>
+						<td style="width:100px">编号</td>
+						<td style="width:100px">始发站</td>
+						<td style="width:100px">终点站</td>
+						<td style="width:100px">出发时间</td>
+						<td style="width:100px">到达时间</td>
+						<td style="width:70px">价格</td>
+						<td style="width:70px">剩余票数</td>
+					</tr>
+					<tr class="cars_tr">
+						<td style="width:100px">原始数据</td>
+						<td style="width:100px">{{changeCar.id}}</td>
+						<td style="width:100px">{{changeCar.startStation}}</td>
+						<td style="width:100px">{{changeCar.endStation}}</td>
+						<td style="width:100px">{{changeCar.startDate}}</td>
+						<td style="width:100px">{{changeCar.endDate}}</td>
+						<td style="width:70px">￥{{changeCar.price}}</td>
+						<td style="width:70px">{{changeCar.tickets}}</td>
+					</tr>
+					<tr class="cars_tr">
+						<td style="width:100px">修改为</td>
+						<td style="width:100px"><input type="text" style="width: 90px;margin:0 5px" v-model="changeCar2.id" /></td>
+						<td style="width:100px"><input type="text" style="width: 90px;margin:0 5px" v-model="changeCar2.startStation" /></td>
+						<td style="width:100px"><input type="text" style="width: 90px;margin:0 5px" v-model="changeCar2.endStation" /></td>
+						<td style="width:100px"><input type="date" style="width: 90px;margin:0 5px" v-model="changeCar2.startDate" /></td>
+						<td style="width:100px"><input type="date" style="width: 90px;margin:0 5px" v-model="changeCar2.endDate" /></td>
+						<td style="width:70px"><input type="text" style="width: 60px;margin:0 5px" v-model="changeCar2.price" /></td>
+						<td style="width:70px"><input type="text" style="width: 60px;margin:0 5px" v-model="changeCar2.tickets" /></td>
+					</tr>
+				</table>
+				<div style="float: right">
+					<input type="button" class="btn btn-primary" data-dismiss="modal" value="保存修改" @click="saveChangeCar()" />
+					<input type="button" class="btn btn-danger" data-dismiss="modal" value="取消修改" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade bs-example-modal-deleteCar" tabindex="-1" role="deleteCar">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<p>是否确认删除该数据？</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteCar()">确认删除</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade bs-example-modal-addCar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" style="padding: 10px; height: 190px">
+				<table class="table table-bordered">
+					<tr class="cars_tr" style="margin: 10px;">
+						<td style="width:100px"></td>
+						<td style="width:100px">编号</td>
+						<td style="width:100px">始发站</td>
+						<td style="width:100px">终点站</td>
+						<td style="width:100px">出发时间</td>
+						<td style="width:100px">到达时间</td>
+						<td style="width:70px">价格</td>
+						<td style="width:70px">剩余票数</td>
+					</tr>
+					<tr class="cars_tr">
+						<td style="width:100px">添加数据</td>
+						<td style="width:100px"><input type="text" style="width: 90px;margin:0 5px" v-model="changeCar2.id" /></td>
+						<td style="width:100px"><input type="text" style="width: 90px;margin:0 5px" v-model="changeCar2.startStation" /></td>
+						<td style="width:100px"><input type="text" style="width: 90px;margin:0 5px" v-model="changeCar2.endStation" /></td>
+						<td style="width:100px"><input type="date" style="width: 90px;margin:0 5px" v-model="changeCar2.startDate" /></td>
+						<td style="width:100px"><input type="date" style="width: 90px;margin:0 5px" v-model="changeCar2.endDate" /></td>
+						<td style="width:70px"><input type="text" style="width: 60px;margin:0 5px" v-model="changeCar2.price" /></td>
+						<td style="width:70px"><input type="text" style="width: 60px;margin:0 5px" v-model="changeCar2.tickets" /></td>
+					</tr>
+				</table>
+				<div style="float: right">
+					<input type="button" class="btn btn-primary" data-dismiss="modal" value="保存修改" @click="addCar()" />
+					<input type="button" class="btn btn-danger" data-dismiss="modal" value="取消修改" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+		
+		
+	</div>
+</body>
+
+</html>
